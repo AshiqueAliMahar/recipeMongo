@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Detail</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="card mb-5">
+        <h4 class="card-header bg-info">
+            Recipe Detail
+            <div class="btn-group float-right">
+                <a href="../index.html" th:href="@{|/recipe/${recipe.id}/changePic|}" class="btn btn-light">Change
+                    Picture</a>
+                <a href="../index.html" th:href="@{/}" class="btn btn-secondary">All Recipes</a>
+            </div>
+        </h4>
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <td>Categories</td>
+                    <td>
+                        <ul th:each="category:${recipe.categories}" th:remove="all-but-first">
+                            <li th:text="${category.categoryName}">cat one</li>
+                            <li>cat two</li>
+                            <li>cat three</li>
+                        </ul>
+                    </td>
+                    <td colspan="2"><img th:src="@{|/recipe/${recipe.id}/image|}" class="img-fluid rounded"></td>
+                </tr>
+                <tr>
+                    <td>Prep Time</td>
+                    <td th:text="${recipe.prepTime}+' mins'">30 min</td>
+                    <td>Difficulty</td>
+                    <td th:text="${recipe.difficulty}">Easy</td>
+                </tr>
+                <tr>
+                    <td>Cook Time</td>
+                    <td th:text="${recipe.cookTime}+' mins'">20 min</td>
+                    <td>Servings</td>
+                    <td th:text="${recipe.servings}">4</td>
+                </tr>
+                <tr>
+                    <td>Source</td>
+                    <td th:text="${recipe.source}+' mins'">30 min</td>
+                    <td>URL</td>
+                    <td><a href="#" th:href="@{${recipe.url}}" th:text="${recipe.url}"> www.google.com</a></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="card mb-5 ">
+        <h4 class="card-header bg-info">Ingridients <a class="btn btn-primary float-right"
+                                                       th:href="@{|/recipe/${recipe.id}/ingredients|}">View</a></h4>
+        <div class="card-body">
+            <ul th:each="ing:${recipe.ingredients}" th:remove="all-but-first">
+                <li th:text="| ${ ing.amount} ${ing.unitOfMeasure.unitOfMeasure} of ${ing.description}|">1 cup of milk
+                </li>
+                <li>1 tea spoon of chocolate</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card mb-5">
+        <h4 class="card-header bg-info">Directions</h4>
+        <div class="card-body">
+            <p class="text-justify" th:text="${recipe.directions}">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Accusantium adipisci aspernatur aut consequatur corporis culpa cum, delectus deleniti deserunt
+                dicta dolorem dolorum eligendi eveniet, ex hic illo magnam modi molestiae natus obcaecati odio odit
+                officia officiis pariatur possimus provident quo saepe sapiente sequi suscipit tempora tenetur, veniam
+                voluptates. At debitis, dicta dolore ea eveniet excepturi fuga maiores, minima numquam odit omnis, optio
+                provident repellat sunt vero voluptatem voluptates. Animi aspernatur aut, autem consectetur cupiditate
+                distinctio dolore dolorum ea eaque illo laborum magni minima modi molestiae necessitatibus nemo nisi
+                numquam provident quas quidem totam ullam voluptas! Aliquam dolor, odit. Accusamus, labore?</p>
+        </div>
+    </div>
+    <div class="card">
+        <h4 class="card-header bg-info">Notes</h4>
+        <div class="card-body">
+            <p class="text-justify" th:if="${recipe.notes!=null}" th:text="${recipe.notes.notes}">Lorem ipsum dolor sit
+                amet, consectetur adipisicing elit. Aperiam esse harum ipsa ipsum maxime mollitia nesciunt officia optio
+                qui recusandae! Adipisci alias consectetur debitis, dolore doloremque eius excepturi hic ipsa molestias
+                nihil non placeat, quisquam ullam? Dolor excepturi facilis ipsam iure laborum necessitatibus nulla odit
+                quidem quis ullam. Animi molestiae nihil rem. Accusantium commodi ea eaque ex, illum incidunt, mollitia
+                pariatur quae, quasi quod rem repellendus sit unde. Aliquid, aperiam beatae commodi deserunt earum fuga
+                fugit harum iste iusto minima nam officiis quae quas quia quis suscipit tempora. Doloremque minus nam
+                obcaecati quaerat recusandae repellat reprehenderit saepe sed tenetur? Totam.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

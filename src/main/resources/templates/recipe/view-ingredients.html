@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="card mb-5">
+        <h4 class="card-header bg-info">Ingredients <a href="../index.html"
+                                                       th:href="@{|/recipe/${ingredients.get(0).recipeId}/ingredient/add|}"
+                                                       class="btn btn-success float-right">Add</a></h4>
+        <div class="card-body">
+            <table class="table table-responsive-md table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Description</th>
+                    <th>View</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                <tr th:each="ing:${ingredients}">
+                    <td th:text="${ing.id}">1</td>
+                    <td th:text="${ing.description}">Guacomole</td>
+                    <td><a href="#" th:href="@{'/recipe/'+${ing.recipeId}+'/ingredient/'+${ing.id}}">View</a></td>
+                    <td><a href="#"
+                           th:href="@{'/recipe/'+${ing.recipeId}+'/ingredient/'+${ing.id}+'/update'}">Update</a></td>
+                    <td><a href="#"
+                           th:href="@{'/recipe/'+${ing.recipeId}+'/ingredient/'+${ing.id}+'/delete'}">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad atque culpa deleniti
+                        error facere ipsum, natus nulla omnis recusandae tempore vero. Architecto delectus illum placeat
+                        quasi! Aut consequatur cum cumque facilis illum incidunt minus numquam, optio praesentium quam
+                        quas quisquam repellendus? Consequuntur facilis illo impedit sapiente temporibus ullam
+                        voluptatibus.
+                    </td>
+                    <td><a href="#">View</a></td>
+                    <td><a href="#">Update</a></td>
+                    <td><a href="#">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad atque culpa deleniti
+                        error facere ipsum, natus nulla omnis recusandae tempore vero. Architecto delectus illum placeat
+                        quasi! Aut consequatur cum cumque facilis illum incidunt minus numquam, optio praesentium quam
+                        quas quisquam repellendus? Consequuntur facilis illo impedit sapiente temporibus ullam
+                        voluptatibus.
+                    </td>
+                    <td><a href="#">View</a></td>
+                    <td><a href="#">Update</a></td>
+                    <td><a href="#">Delete</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad atque culpa deleniti
+                        error facere ipsum, natus nulla omnis recusandae tempore vero. Architecto delectus illum placeat
+                        quasi! Aut consequatur cum cumque facilis illum incidunt minus numquam, optio praesentium quam
+                        quas quisquam repellendus? Consequuntur facilis illo impedit sapiente temporibus ullam
+                        voluptatibus.
+                    </td>
+                    <td><a href="#">View</a></td>
+                    <td><a href="#">Update</a></td>
+                    <td><a href="#">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

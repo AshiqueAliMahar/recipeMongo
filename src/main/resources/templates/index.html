@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div class="container">
+
+
+    <div class="card">
+        <h4 class="card-header card-title bg-primary text-light">Recipes<a th:href="@{/recipe/add-recipe-ctrlr}"
+                                                                           class="btn btn-success float-right">Add
+            recipe</a></h4>
+        <div class="card-body">
+            <table class="table table-active table-responsive-md rounded">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>description</th>
+                    <th>View</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tr th:each="recipe,statusvar:${recipes}">
+                    <td th:text="${recipe.id}">ID</td>
+                    <th th:text="${recipe.description}">description</th>
+                    <th><a href="#" th:href="@{|recipe/showdtl/${recipe.id}|}">View</a></th>
+                    <th><a href="#" th:href="@{'/recipe/'+${recipe.id}+'/update'}">Update</a></th>
+                    <th><a href="#" th:href="@{|/recipe/${recipe.id}/delete|}">Delete</a></th>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

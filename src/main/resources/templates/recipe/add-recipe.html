@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h4 class="card-header card-title bg-primary text-light">Recipes<a href="../index.html" th:href="@{/}"
+                                                                           class="btn btn-success float-right">All
+            Recipes</a></h4>
+        <div class="card-body">
+            <form th:object="${rc}" method="post" th:action="@{/recipe/add-recipe-ctrlr}">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors()}">
+                    <p>Please Correct Errors</p>
+                </div>
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label class="col-form-label" th:text="#{recipe.description}">Description</label>
+                    <input type="text" th:field="*{description}" class="form-control" placeholder="Description"
+                           th:class="${#fields.hasErrors('description')?'form-control alert alert-danger':'form-control'}">
+                    <span th:if="${#fields.hasErrors('description')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="descerror:${#fields.errors('description')}"
+                                    th:text="${descerror.toString()}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Prep Time</label>
+                    <input th:field="*{prepTime}" placeholder="Prep Time" class="form-control"
+                           th:class="'form-control'+${#fields.hasErrors('prepTime')?' alert alert-danger':''}">
+                    <span th:if="${#fields.hasErrors('prepTime')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="perpTime:${#fields.errors('prepTime')}" th:text="${perpTime}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Cook Time</label>
+                    <input th:field="*{cookTime}" placeholder="Cook Time" class="form-control"
+                           th:class="'form-control'+${#fields.hasErrors('cookTime')?' alert alert-danger':''}">
+                    <span th:if="${#fields.hasErrors('cookTime')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="error:${#fields.errors('cookTime')}" th:text="${error}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Serving</label>
+                    <input th:field="*{servings}" placeholder="Serving" class="form-control"
+                           th:if="'form-control '+${#fields.hasErrors('servings')?' alert alert-danger':''}">
+                    <span th:if="${#fields.hasErrors('servings')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="error:${#fields.errors('servings')}" th:text="${error}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Source</label>
+                    <input th:field="*{source}" placeholder="Source" class="form-control"
+                           th:class="'form-control'+${#fields.hasErrors('source')?' alert alert-danger':''}">
+                    <span th:if="${#fields.hasErrors('source')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="error:${#fields.errors('source')}" th:text="${error}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">URL</label>
+                    <input th:field="*{url}" placeholder="URL" class="form-control"
+                           th:class="'form-control'+${#fields.hasErrors('url')?' alert alert-danger':''}">
+                    <span th:if="${#fields.hasErrors('url')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="error:${#fields.errors('url')}" th:text="${error}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Direction</label>
+                    <input th:field="*{directions}" placeholder="Direction" class="form-control"
+                           th:class="'form-control'+${#fields.hasErrors('directions')?' alert alert-danger':''}">
+                    <span th:if="${#fields.hasErrors('directions')}">
+                            <ul class="alert alert-danger">
+                                <li th:text="${error}" th:each="error:${#fields.errors('directions')}"></li>
+                            </ul>
+                        </span>
+                </div>
+                <div>
+                    <label class="col-form-label">Difficulty</label>
+                    <select th:field="*{difficulty}" class="form-control">
+                        <option th:each="difEnum:${difficulty}" th:text="${difEnum.toString()}"
+                                th:value="${difEnum.toString()}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Notes</label>
+                    <textarea th:field="*{notes.notes}" class="form-control"
+                              th:class="'form-control'+${#fields.hasErrors('notes.notes')?' alert alert-danger':''}"></textarea>
+                    <span th:if="${#fields.hasErrors('notes.notes')}">
+                            <ul class="alert alert-danger">
+                                <li th:each="error:${#fields.errors('notes.notes')}" th:text="${error}"></li>
+                            </ul>
+                        </span>
+                </div>
+
+                <div th:each="cat:${cats}">
+                    <input type="checkbox" th:value="${cat.getId()}"><span th:text="${cat.categoryName}">Cat1</span>
+                </div>
+                <button class="btn btn-outline-primary btn-block">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Ingredient</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h4 class="card-header card-title bg-primary text-light">Ingredient<a href="../index.html" th:href="@{/}"
+                                                                              class="btn btn-success float-right">All
+            Recipes</a></h4>
+        <div class="card-body">
+
+            <div class="row">
+                <form method="post" th:action="@{|/recipe/${ingredient.recipeId}/ingredient/${ingredient.id}/update|}"
+                      th:if="${ingredient ne null}" th:object="${ingredient}">
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input class="form-control" th:field="*{description}">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" class="form-control" th:field="*{amount}">
+                    </div>
+                    <div class="form-group">
+                        <label>Unit Of Measure</label>
+                        <select class="form-control" th:field="*{unitOfMeasureCommand.id}">
+                            <option th:each="um:${uom}" th:value="${um.id}" th:text="${um.unitOfMeasure}"
+                                    th:selected="${#strings.equals(um.id,ingredient.id)}"></option>
+                        </select>
+                    </div>
+                    <button th:field="${ingredient.id}" class="btn btn-success">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
